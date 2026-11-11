@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 const router = express.Router(); 
+const newDate = new Date().toISOString();
 
 // Get all tasks
 router.get('/', (req, res) => {
@@ -29,6 +30,8 @@ router.post('/', (req, res) => {
         description,
         deadline,
         priority,
+        created_at: newDate,
+        updated_at: newDate,
         done
     };
     tasksData.tasks.push(newTask);
@@ -43,7 +46,7 @@ router.put('/:id', (req, res) => {
     if (taskIndex === -1) {
         return res.status(404).json({ status: 404, message: 'Task not found' });
     }
-    const updatedTask = { ...tasksData.tasks[taskIndex], ...req.body, id:id };
+    const updatedTask = { ...tasksData.tasks[taskIndex], ...req.body, id:id, updated_at: newDate };
     tasksData.tasks[taskIndex] = updatedTask;
     res.json(updatedTask);
 });
