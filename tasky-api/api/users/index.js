@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 });
 
 // register(Create)/Authenticate User
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         if (!req.body.username || !req.body.password) {
             return res.status(400).json({ success: false, msg: 'Username and password are required.' });
@@ -27,7 +27,7 @@ router.post('/', asyncHandler(async (req, res) => {
         console.error(error);
         res.status(500).json({ success: false, msg: 'Internal server error.' });
     }
-}));
+});
 
 async function registerUser(req, res) {
     // Add input validation logic here
